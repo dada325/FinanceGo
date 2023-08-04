@@ -1,7 +1,9 @@
 import logging
+from database_helpers import get_new_articles, update_article_in_database, mark_as_processed
+from gpt3_processing import process_with_gpt3
 import requests
 import os
-from database_helpers import is_in_database, add_to_database
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -40,3 +42,31 @@ def call_alpaca_api():
     response = requests.get(ALPACA_ENDPOINT, headers=HEADERS)
     response.raise_for_status()  # This will raise an HTTPError if the HTTP request returned an unsuccessful status code
     return response
+
+
+# get new article and process with gpt3
+
+def get_new_articles():
+    """
+    Retrieve new articles that haven't been processed yet.
+    """
+    connect_to_database()
+    return articles_collection.find({'processed': False})
+
+
+
+# i choose here to 
+@app.task
+def process_articles():
+    new_articles = get_new_articles()
+    
+    for article in new_articles:
+        # Process the article with GPT-3
+        processed_article = process_with_gpt3(article)
+
+        # Update the article in the database with the processed data
+        update_article_in_database(processed_article)
+
+        # Mark the article as processed
+        mark_as_processed(article['id'])
+
