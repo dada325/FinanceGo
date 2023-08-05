@@ -17,6 +17,16 @@ This document outlines the comprehensive development process for an AI-driven ne
 * Displaying articles on a React frontend.
 * Scheduling tasks with Celery.
 
+## Work in Progress
+
+
+
+* Improving error handling and adding more robust logging.
+* Adding more comprehensive tests, particularly integration and end-to-end tests.
+* Implementing user accounts and personalization features.
+* Adding more interactivity to the frontend, such as filters or search functionality.
+* Implementing a system for monitoring and alerting, to help you quickly respond to any issues that arise.
+* Consider adding more advanced NLP features, like the use of DistilBERT or other models, to improve the quality of the sentiment analysis and stock prediction.
 
 
 ## High Level Design 
