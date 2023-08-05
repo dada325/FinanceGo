@@ -1,3 +1,8 @@
+#
+#Please replace 'pyamqp://guest@localhost//' with your actual RabbitMQ connection string, or with the connection string of your chosen broker.
+#
+
+
 from celery import Celery
 
 app = Celery('tasks', broker='pyamqp://guest@localhost//', backend='rpc://')
