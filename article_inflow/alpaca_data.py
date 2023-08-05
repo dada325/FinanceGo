@@ -1,6 +1,6 @@
 import logging
 from database_helpers import get_new_articles, update_article_in_database, mark_as_processed
-from gpt4_processing import process_with_gpt4
+from .gpt4_processing import process_with_gpt4
 import requests
 import os
 
