@@ -6,8 +6,6 @@ import os
 logging.basicConfig(level=logging.INFO)
 
 # Fetch MongoDB connection string from environment variables
-
-# Here one need to change the string to the actural one
 MONGO_CONNECTION_STRING = os.environ.get('MONGO_CONNECTION_STRING', 'YOUR_MONGODB_ADDRESS')
 
 client = MongoClient(MONGO_CONNECTION_STRING)
@@ -57,3 +55,23 @@ def add_to_database(article):
     except Exception as e:
         logging.error(f"Error inserting article {article['id']}: {e}")
 
+def get_new_articles():
+    """
+    Retrieve new articles that haven't been processed yet.
+    """
+    connect_to_database()
+    return articles_collection.find({'processed': False})
+
+def update_article_in_database(processed_article):
+    """
+    Update the article in the database with the processed data.
+    """
+    connect_to_database()
+    articles_collection.update_one({'id': processed_article['id']}, {"$set": processed_article})
+
+def mark_as_processed(article_id):
+    """
+    Mark the article as processed in the database.
+    """
+    connect_to_database()
+    articles_collection.update_one({'id': article_id}, {"$set": {"processed": True}})
