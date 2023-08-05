@@ -11,6 +11,11 @@ This document outlines the comprehensive development process for an AI-driven ne
 
 ## Development Process
 
+* Fetching articles and processing them with GPT-4.
+* Storing processed articles in a MongoDB database.
+* Serving processed articles through a Flask API.
+* Displaying articles on a React frontend.
+* Scheduling tasks with Celery.
 
 
 
