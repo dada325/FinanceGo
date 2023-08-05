@@ -1,6 +1,6 @@
 from celery import Celery
 
-app = Celery('tasks', broker='pyamqp://guest@localhost//')
+app = Celery('tasks', broker='pyamqp://guest@localhost//', backend='rpc://')
 
 app.conf.beat_schedule = {
     'fetch-every-30-minutes': {
