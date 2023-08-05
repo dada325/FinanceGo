@@ -1,6 +1,6 @@
 import logging
 from database_helpers import get_new_articles, update_article_in_database, mark_as_processed
-from gpt3_processing import process_with_gpt3
+from gpt4_processing import process_with_gpt4
 import requests
 import os
 
@@ -61,8 +61,8 @@ def process_articles():
     new_articles = get_new_articles()
     
     for article in new_articles:
-        # Process the article with GPT-3
-        processed_article = process_with_gpt3(article)
+        # Process the article with GPT-4
+        processed_article = process_with_gpt4(article)
 
         # Update the article in the database with the processed data
         update_article_in_database(processed_article)
